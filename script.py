@@ -33,14 +33,15 @@ selected_location = ""
 # Write code for user interaction here
 while len(selected_location) == 0:
     user_input = str(input(
-        "\nWhat type of food would you like to eat?\nType the beginning of that food type and press enter to see if "
-        "it's here.\n")).lower()
-
+        "\nWhat area of Charlotte would you like to search for cafes in?\n")).lower()
+    
     # Search for user_input in food types data structure here
     matching_locations = []
     location_list_head = my_location_list.get_head_node()
+
     while location_list_head is not None:
-        if str(location_list_head.get_value()).startswith(user_input):
+        if str(location_list_head.get_value()).lower().startswith(user_input):
+            print('Found matching value')
             matching_locations.append(location_list_head.get_value())
         location_list_head = location_list_head.get_next_node()
 
@@ -48,16 +49,16 @@ while len(selected_location) == 0:
     for cafe in matching_locations:
         print(cafe)
 
-    # Check if only one type of restaurant was found, ask user if they would like to select this type
+    # Check if only one cafe was found, ask user if they would like to select this cafe
     if len(matching_locations) == 1:
         select_type = str(input(
-            "\nThe only matching type for the specified input is " + matching_locations[0] + ". \nDo you want to look at cafes in" +
+            "\nThe only matching location for the specified input is " + matching_locations[0] + ". \nDo you want to look at cafes in " +
             matching_locations[0] + "? Enter y for yes and n for no\n")).lower()
 
         # After finding location write code for retrieving cafe data here
         if select_type == 'y':
             selected_location = matching_locations[0]
-            print("Selected Food Type: " + selected_location)
+            print("Selected Cafe Location: " + selected_location)
             cafe_list_head = my_cafe_list.get_head_node()
             while cafe_list_head.get_next_node() is not None:
                 sublist_head = cafe_list_head.get_value().get_head_node()
